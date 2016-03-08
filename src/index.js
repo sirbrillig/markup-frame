@@ -50,17 +50,20 @@ export default React.createClass( {
 	updateFrameContent( content ) {
 		debug( 'adding content to iframe', content.length );
 		this.iframe.addEventListener( 'load', this.finishPreviewLoad );
-		this.iframe.contentDocument.open();
-		this.iframe.contentDocument.write( content );
-		this.iframe.contentDocument.close();
+		if ( ! this.iframe.contentWindow || ! this.iframe.contentWindow.document ) {
+			throw new Error( 'The iframe could not be used because it has no document object' );
+		}
+		this.iframe.contentWindow.document.open();
+		this.iframe.contentWindow.document.write( content );
+		this.iframe.contentWindow.document.close();
 	},
 
 	finishPreviewLoad() {
-		this.props.onLoad( this.iframe.contentDocument );
-		const domLinks = Array.prototype.slice.call( this.iframe.contentDocument.querySelectorAll( 'a' ) );
+		this.props.onLoad( this.iframe.contentWindow.document );
+		const domLinks = Array.prototype.slice.call( this.iframe.contentWindow.document.querySelectorAll( 'a' ) );
 		debug( `disabling ${domLinks.length} links in preview` );
 		domLinks.map( this.disableLink );
-		this.iframe.contentDocument.body.onclick = this.handleClick;
+		this.iframe.contentWindow.document.body.onclick = this.handleClick;
 	},
 
 	disableLink( element ) {
