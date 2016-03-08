@@ -33,6 +33,8 @@ ReactDOM.render(
 );
 ```
 
+![MarkupFrame Example](https://cldup.com/l3pN6BBD0p.png)
+
 ## Props
 
 * `markup`: The markup to display in the preview.
