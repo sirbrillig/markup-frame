@@ -10,7 +10,10 @@ Sometimes you need to display html inside an iframe, but not it's not at a URL. 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MarkupFrame from 'markup-frame';
-import getMarkupFromAPI from './my-api-lib';
+
+function getMarkupFromAPI() {
+	return '<h1>Hello World!</h1>';
+}
 
 const FrameWrapper = React.createClass( {
 	onFrameLoad( frameDocument ) {
@@ -25,8 +28,8 @@ const FrameWrapper = React.createClass( {
 } );
 
 ReactDOM.render(
-	<FrameWrapper>,
-	document.getElementById( '.content' )
+	<FrameWrapper />,
+	document.getElementById( 'example' )
 );
 ```
 
