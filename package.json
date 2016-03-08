@@ -4,7 +4,7 @@
   "description": "A React component to display raw html markup inside an iframe",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --compilers js:babel-register",
+    "test": "node_modules/mocha/bin/mocha --require test/setup.js --recursive test --compilers js:babel-register",
     "build": "babel src -d lib",
     "prepublish": "npm run build"
   },
@@ -27,7 +27,10 @@
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "enzyme": "^2.0.0",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
   "dependencies": {},
   "repository": {
