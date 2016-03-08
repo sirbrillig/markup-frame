@@ -28,5 +28,14 @@
     "babel-register": "^6.5.2",
     "chai": "^3.5.0",
     "mocha": "^2.4.5"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirbrillig/markup-frame.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sirbrillig/markup-frame/issues"
+  },
+  "homepage": "https://github.com/sirbrillig/markup-frame#readme"
 }
