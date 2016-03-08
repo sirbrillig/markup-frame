@@ -1,0 +1,32 @@
+{
+  "name": "markup-frame",
+  "version": "1.0.0",
+  "description": "A React component to display raw html markup inside an iframe",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --compilers js:babel-register",
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "keywords": [
+    "react",
+    "iframe"
+  ],
+  "author": "Payton Swick <payton@foolord.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
