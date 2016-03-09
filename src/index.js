@@ -47,23 +47,30 @@ export default React.createClass( {
 		return ( oldMarkup !== newMarkup );
 	},
 
+	getIFrame() {
+		if ( ! this.iframe ) {
+			throw new Error( 'The iframe element cannot be used because it has not been created' );
+		}
+		return this.iframe;
+	},
+
 	updateFrameContent( content ) {
 		debug( 'adding content to iframe', content.length );
-		this.iframe.addEventListener( 'load', this.finishPreviewLoad );
-		if ( ! this.iframe.contentWindow || ! this.iframe.contentWindow.document ) {
+		this.getIFrame().addEventListener( 'load', this.finishPreviewLoad );
+		if ( ! this.getIFrame().contentWindow || ! this.getIFrame().contentWindow.document ) {
 			throw new Error( 'The iframe could not be used because it has no document object' );
 		}
-		this.iframe.contentWindow.document.open();
-		this.iframe.contentWindow.document.write( content );
-		this.iframe.contentWindow.document.close();
+		this.getIFrame().contentWindow.document.open();
+		this.getIFrame().contentWindow.document.write( content );
+		this.getIFrame().contentWindow.document.close();
 	},
 
 	finishPreviewLoad() {
-		this.props.onLoad( this.iframe.contentWindow.document );
-		const domLinks = Array.prototype.slice.call( this.iframe.contentWindow.document.querySelectorAll( 'a' ) );
+		this.props.onLoad( this.getIFrame().contentWindow.document );
+		const domLinks = Array.prototype.slice.call( this.getIFrame().contentWindow.document.querySelectorAll( 'a' ) );
 		debug( `disabling ${domLinks.length} links in preview` );
 		domLinks.map( this.disableLink );
-		this.iframe.contentWindow.document.body.onclick = this.handleClick;
+		this.getIFrame().contentWindow.document.body.onclick = this.handleClick;
 	},
 
 	disableLink( element ) {
@@ -82,7 +89,7 @@ export default React.createClass( {
 		this.props.onClick( event );
 	},
 
-	saveIframe( el ) {
+	saveIFrame( el ) {
 		this.iframe = el;
 	},
 
@@ -91,7 +98,7 @@ export default React.createClass( {
 			<div className="markup-frame">
 				<iframe
 					className="markup-frame-iframe"
-					ref={ this.saveIframe }
+					ref={ this.saveIFrame }
 				/>
 			</div>
 		);
