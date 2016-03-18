@@ -12,8 +12,6 @@ export default React.createClass( {
 		markup: React.PropTypes.string.isRequired,
 		// The handler to call when an element is clicked. Will be passed the event.
 		onClick: React.PropTypes.func,
-		// The handler to call when a link is clicked. Will be passed the target URL.
-		onClickLink: React.PropTypes.func,
 		// The function to call when the DOM is loaded. Will be passed the DOM.
 		onLoad: React.PropTypes.func,
 	},
@@ -22,7 +20,6 @@ export default React.createClass( {
 		return {
 			markup: '',
 			onClick: noop,
-			onClickLink: noop,
 			onLoad: noop,
 		};
 	},
@@ -67,21 +64,7 @@ export default React.createClass( {
 
 	finishPreviewLoad() {
 		this.props.onLoad( this.getIFrame().contentWindow.document );
-		const domLinks = Array.prototype.slice.call( this.getIFrame().contentWindow.document.querySelectorAll( 'a' ) );
-		debug( `disabling ${domLinks.length} links in preview` );
-		domLinks.map( this.disableLink );
 		this.getIFrame().contentWindow.document.body.onclick = this.handleClick;
-	},
-
-	disableLink( element ) {
-		const url = element.href;
-		element.href = '#';
-		element.onClick = () => this.handleClickLink( url );
-	},
-
-	handleClickLink( url ) {
-		debug( 'click on link detected for url', url );
-		this.props.onClickLink( url );
 	},
 
 	handleClick( event ) {
