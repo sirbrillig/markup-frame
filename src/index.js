@@ -60,9 +60,11 @@ export default React.createClass( {
 		this.getIFrame().contentWindow.document.open();
 		this.getIFrame().contentWindow.document.write( content );
 		this.getIFrame().contentWindow.document.close();
+		debug( 'content added, waiting for load to complete' );
 	},
 
 	finishPreviewLoad() {
+		debug( 'iframe has loaded' );
 		this.props.onLoad( this.getIFrame().contentWindow.document );
 		this.getIFrame().contentWindow.document.body.onclick = this.handleClick;
 	},
