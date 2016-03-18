@@ -22,12 +22,12 @@ describe( '<MarkupFrame />', function() {
 	} );
 
 	it( 'calls props.onLoad with the iframe document', function( done ) {
-		const onLoad = doc => doc.querySelector( 'h1' ).innerHTML = 'greetings';
-		mount( <MarkupFrame markup="<h1>Hello World</h1>" onLoad={ onLoad } /> );
-		setTimeout( function() {
+		const onLoad = function( doc ) {
+			doc.querySelector( 'h1' ).innerHTML = 'greetings';
 			const iframe = window.document.querySelector( 'iframe' );
 			expect( iframe.contentWindow.document.body.innerHTML ).to.eql( '<h1>greetings</h1>' );
 			done();
-		}, 100 );
+		};
+		mount( <MarkupFrame markup="<h1>Hello World</h1>" onLoad={ onLoad } /> );
 	} );
 } );
