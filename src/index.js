@@ -2,7 +2,7 @@ import React from 'react';
 import debugFactory from 'debug';
 
 const noop = () => null;
-const debug = debugFactory( 'calypso:site-preview' );
+const debug = debugFactory( 'markup-frame' );
 
 export default React.createClass( {
 	displayName: 'MarkupFrame',
