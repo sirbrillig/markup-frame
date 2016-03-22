@@ -21,7 +21,7 @@ describe( '<MarkupFrame />', function() {
 		expect( iframe.contentWindow.document.body.innerHTML ).to.eql( '<h1>Hello World</h1>' )
 	} );
 
-	it( 'calls props.onLoad with the iframe document', function( done ) {
+	it.skip( 'calls props.onLoad with the iframe document', function( done ) {
 		const onLoad = function( doc ) {
 			doc.querySelector( 'h1' ).innerHTML = 'greetings';
 			const iframe = window.document.querySelector( 'iframe' );
